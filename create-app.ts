@@ -48,9 +48,15 @@ export async function createApp({
   const isOnline = !useYarn || (await getOnline());
   const originalDirectory = process.cwd();
 
-  console.log(
-    `🚀 Setting up your new Web3 frontend in ${chalk.green(root)}.`
-  );
+  console.log(`      
+  :::::::::                       ::::::::: 
+  :+:    :+:                      :+:    :+: 
+  +:+    +:+                      +:+    +:+  
+  +#+    +:+                      +#+    +:+   
+  +#+    +#+                      +#+    +#+    
+  #+#    #+#                      #+#    #+#     
+  #########       ##########      #########       `);
+  console.log(`🚀 Setting up your new Web3 frontend in ${chalk.green(root)}.`);
   console.log();
 
   process.chdir(root);
