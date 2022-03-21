@@ -146,14 +146,16 @@ async function notifyUpdate(): Promise<void> {
 
       console.log();
       console.log(
-        chalk.yellow.bold('A new version of `create-next-app` is available!')
+        chalk.yellow.bold(
+          'A new version of `create-web3-frontend` is available!'
+        )
       );
       console.log(
         'You can update by running: ' +
           chalk.cyan(
             pkgManager === 'yarn'
-              ? 'yarn global add create-next-app'
-              : `${pkgManager} install --global create-next-app`
+              ? 'yarn global add create-web3-frontend'
+              : `${pkgManager} install --global create-web3-frontend`
           )
       );
       console.log();

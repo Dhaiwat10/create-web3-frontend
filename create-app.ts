@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import retry from 'async-retry';
 import chalk from 'chalk';
 import cpy from 'cpy';
 import fs from 'fs';
@@ -49,7 +48,9 @@ export async function createApp({
   const isOnline = !useYarn || (await getOnline());
   const originalDirectory = process.cwd();
 
-  console.log(`Creating a new Next.js app in ${chalk.green(root)}.`);
+  console.log(
+    `🚀 Setting up your new Web3 frontend in ${chalk.green(root)}.`
+  );
   console.log();
 
   process.chdir(root);
@@ -145,6 +146,7 @@ export async function createApp({
     cwd: path.join(__dirname, 'templates', template),
     rename: (name) => {
       switch (name) {
+        case 'env.example':
         case 'gitignore':
         case 'eslintrc.json': {
           return '.'.concat(name);
