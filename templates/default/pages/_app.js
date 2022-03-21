@@ -29,7 +29,7 @@ const connectors = ({ chainId }) => {
     new WalletLinkConnector({
       chains,
       options: {
-        appName: 'dForms',
+        appName: 'create-web3-frontend',
         jsonRpcUrl: `${rpcUrl}/${infuraId}`,
       },
     }),
