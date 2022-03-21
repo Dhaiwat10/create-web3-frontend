@@ -12,8 +12,8 @@ npx create-web3-frontend --ts my-app
 ## Available options
 
 1. `--ts` or `--typescript`: Use TypeScript instead of JavaScript.
-2. `'--use-npm`: Use `npm` for installing dependencies.
-3. `'--use-pnpm`: Use `pnpm` for installing dependencies.
+2. `--use-npm`: Use `npm` for installing dependencies.
+3. `--use-pnpm`: Use `pnpm` for installing dependencies.
 
 ## Thanks
 
