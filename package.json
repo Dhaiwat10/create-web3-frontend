@@ -1,6 +1,6 @@
 {
   "name": "create-web3-frontend",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Initialize a React web3 frontend using Next.js, wagmi, ethers and TailwindCSS",
   "repository": "https://github.com/dhaiwat10/create-web3-frontend",
   "author": "Dhaiwat Pandya <dhaiwatpandya@gmail.com>",
