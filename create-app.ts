@@ -94,7 +94,13 @@ export async function createApp({
   /**
    * Default dependencies.
    */
-  const dependencies = ['react@17.0.0', 'react-dom@17.0.0', 'next', 'wagmi', 'ethers'];
+  const dependencies = [
+    'react@17.0.0',
+    'react-dom@17.0.0',
+    'next',
+    'wagmi@0.2.28',
+    'ethers',
+  ];
   /**
    * Default devDependencies.
    */
