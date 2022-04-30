@@ -1,27 +1,27 @@
-import { NextPage } from 'next';
-import { FC } from 'react';
-import { useConnect, useAccount } from 'wagmi';
+import type { NextPage } from 'next';
+import type { FC } from 'react';
+import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
 
 const Home: NextPage = () => {
-  const [{ data: connectData, error: connectError }, connect] = useConnect();
-  const { connected } = connectData;
-  const [{ data: accountData }, disconnect] = useAccount({
-    fetchEns: true,
-  });
+  const { data: account } = useAccount();
+  const { data: ensName } = useEnsName({ address: account?.address });
+  const { connect, connectors, error, isConnecting, pendingConnector } =
+    useConnect();
+  const { disconnect } = useDisconnect();
 
-  if (connected) {
+  if (account) {
     return (
       <div className='py-24 text-center'>
-        <p className='text-2xl font-bold'>
-          Welcome {accountData?.ens?.name || accountData?.address}
-        </p>
+        <div>
+          {ensName ? `${ensName} (${account.address})` : account.address}
+        </div>
+        <div>Connected to {account?.connector?.name}</div>
         <button
-          className='mx-auto mt-10 rounded bg-slate-200 p-2'
-          onClick={disconnect}
+          className='rounded bg-slate-200 p-2'
+          onClick={() => disconnect()}
         >
           Disconnect
         </button>
-        <InfoSection />
       </div>
     );
   }
@@ -31,24 +31,24 @@ const Home: NextPage = () => {
       <h1 className='text-2xl font-bold'>Welcome to create-web3-frontend</h1>
       <p className='mt-10'>Connect your wallet:</p>
       <div className='mt-5 flex justify-center gap-6'>
-        {/* connectData.connectors contains the list of available 'connectors' like Metamask, WalletConnect, etc */}
-        {connectData.connectors.map((x) => (
-          <button
-            className='rounded bg-slate-200 p-2'
-            key={x.id}
-            onClick={() => connect(x)}
-          >
-            {x.name}
-            {!x.ready && ' (unsupported)'}
-          </button>
-        ))}
+        {connectors.map((connector) => {
+          return (
+            <button
+              className='rounded bg-slate-200 p-2'
+              key={connector.id}
+              onClick={() => connect(connector)}
+            >
+              {connector.name}
+              {!connector.ready && ' (unsupported)'}
+              {isConnecting &&
+                connector.id === pendingConnector?.id &&
+                ' (connecting)'}
+            </button>
+          );
+        })}
       </div>
 
-      {connectError && (
-        <p className='text-red-500'>
-          {connectError?.message ?? 'Failed to connect'}
-        </p>
-      )}
+      {error && <div>{error.message}</div>}
 
       <InfoSection />
     </div>
@@ -74,6 +74,13 @@ const InfoSection: FC = () => {
           className='underline text-gray-600'
         >
           Open an issue on Github
+        </a>
+        <a
+          href='https://twitter.com/dhaiwat10'
+          target='_blank'
+          className='underline text-gray-600'
+        >
+          DM me on Twitter
         </a>
       </div>
     </div>
