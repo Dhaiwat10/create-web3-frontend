@@ -98,7 +98,7 @@ export async function createApp({
     'react@17.0.0',
     'react-dom@17.0.0',
     'next',
-    'wagmi@0.2.28',
+    'wagmi@0.3.1',
     'ethers',
   ];
   /**
