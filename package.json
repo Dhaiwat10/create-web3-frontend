@@ -12,7 +12,9 @@
     "next.js",
     "web3",
     "wagmi",
-    "tailwind"
+    "tailwind",
+    "rainbowkit",
+    "rainbow"
   ],
   "bin": {
     "create-web3-frontend": "./dist/index.js"

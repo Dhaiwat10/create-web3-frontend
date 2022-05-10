@@ -98,8 +98,9 @@ export async function createApp({
     'react@17.0.0',
     'react-dom@17.0.0',
     'next',
-    'wagmi@0.3.1',
+    'wagmi@0.3.5',
     'ethers',
+    '@rainbow-me/rainbowkit@0.1.0',
   ];
   /**
    * Default devDependencies.
