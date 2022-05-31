@@ -5,11 +5,11 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 const Home: NextPage = () => {
   return (
     <div className='py-6 justify-center text-center'>
-      <div className='mx-auto'>
+      <div className='flex justify-center'>
         <ConnectButton />
       </div>
 
-      <h1 className='text-4xl font-bold mt-6'>create-web3-frontend</h1>
+      <h1 className='text-4xl font-bold mt-6'>🚀 create-web3-frontend</h1>
       <InfoSection />
     </div>
   );
@@ -18,7 +18,6 @@ const Home: NextPage = () => {
 const InfoSection: FC = () => {
   return (
     <div className='mt-10'>
-      <hr className='my-4' />
       <h2 className='text-xl font-bold'>If you need help</h2>
       <div className='flex flex-col gap-2 mt-2'>
         <a
