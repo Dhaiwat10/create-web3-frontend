@@ -1,53 +1,13 @@
-import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Home = () => {
-  const { data: account } = useAccount();
-  const { data: ensName } = useEnsName({ address: account?.address });
-  const { connect, connectors, error, isConnecting, pendingConnector } =
-    useConnect();
-  const { disconnect } = useDisconnect();
-
-  if (account) {
-    return (
-      <div className='py-24 text-center'>
-        <div>
-          {ensName ? `${ensName} (${account.address})` : account.address}
-        </div>
-        <div>Connected to {account?.connector?.name}</div>
-        <button
-          className='rounded bg-slate-200 p-2'
-          onClick={() => disconnect()}
-        >
-          Disconnect
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <div className='py-24 text-center'>
-      <h1 className='text-2xl font-bold'>Welcome to create-web3-frontend</h1>
-      <p className='mt-10'>Connect your wallet:</p>
-      <div className='mt-5 flex justify-center gap-6'>
-        {connectors.map((connector) => {
-          return (
-            <button
-              className='rounded bg-slate-200 p-2'
-              key={connector.id}
-              onClick={() => connect(connector)}
-            >
-              {connector.name}
-              {!connector.ready && ' (unsupported)'}
-              {isConnecting &&
-                connector.id === pendingConnector?.id &&
-                ' (connecting)'}
-            </button>
-          );
-        })}
+    <div className='py-6 justify-center text-center'>
+      <div className='flex justify-center'>
+        <ConnectButton />
       </div>
 
-      {error && <div>{error.message}</div>}
-
+      <h1 className='text-4xl font-bold mt-6'>🚀 create-web3-frontend</h1>
       <InfoSection />
     </div>
   );
@@ -56,7 +16,6 @@ const Home = () => {
 const InfoSection = () => {
   return (
     <div className='mt-10'>
-      <hr className='my-4' />
       <h2 className='text-xl font-bold'>If you need help</h2>
       <div className='flex flex-col gap-2 mt-2'>
         <a
