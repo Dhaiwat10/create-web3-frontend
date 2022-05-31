@@ -1,50 +1,36 @@
 import '../styles/globals.css';
-import { chain, createClient, defaultChains, Provider } from 'wagmi';
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
-import { InjectedConnector } from 'wagmi/connectors/injected';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
+import { publicProvider } from 'wagmi/providers/public';
 
-// Get environment variables
-const infuraId = process.env.NEXT_PUBLIC_INFURA_ID;
+const { chains, provider } = configureChains(
+  [chain.mainnet],
+  [
+    jsonRpcProvider({ rpc: () => ({ http: 'https://rpc.ankr.com/eth' }) }),
+    publicProvider(),
+  ]
+);
 
-// Pick chains
-const chains = defaultChains;
-const defaultChain = chain.mainnet;
+const { connectors } = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains,
+});
 
-// Set up connectors
-const client = createClient({
+const wagmiClient = createClient({
   autoConnect: true,
-  connectors({ chainId }) {
-    const chain = chains.find((x) => x.id === chainId) ?? defaultChain;
-    const rpcUrl = chain.rpcUrls.infura
-      ? `${chain.rpcUrls.infura}/${infuraId}`
-      : chain.rpcUrls.default;
-    return [
-      new InjectedConnector(),
-      new CoinbaseWalletConnector({
-        options: {
-          appName: 'create-web3-frontend',
-          chainId: chain.id,
-          jsonRpcUrl: rpcUrl,
-        },
-      }),
-      new WalletConnectConnector({
-        options: {
-          qrcode: true,
-          rpc: {
-            [chain.id]: rpcUrl,
-          },
-        },
-      }),
-    ];
-  },
+  connectors,
+  provider,
 });
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider client={client}>
-      <Component {...pageProps} />
-    </Provider>
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Component {...pageProps} />
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }
 
