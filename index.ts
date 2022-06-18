@@ -26,6 +26,12 @@ const program = new Commander.Command(packageJson.name)
 `
   )
   .option(
+    '--chakra, --chakra-ui',
+    `
+    Use Chakra UI instead of Tailwind.
+    `
+  )
+  .option(
     '--use-npm',
     `
   Explicitly tell the CLI to bootstrap the app using npm
@@ -110,6 +116,7 @@ async function run(): Promise<void> {
       appPath: resolvedProjectPath,
       packageManager,
       typescript: program.typescript,
+      cssLibrary: program.chakraUi ? 'chakra-ui' : 'tailwind',
     });
   } catch (reason) {
     if (!(reason instanceof DownloadError)) {
@@ -132,6 +139,7 @@ async function run(): Promise<void> {
       appPath: resolvedProjectPath,
       packageManager,
       typescript: program.typescript,
+      cssLibrary: program.chakraUi ? 'chakra-ui' : 'tailwind',
     });
   }
 }
