@@ -14,16 +14,25 @@ import type { PackageManager } from './helpers/get-pkg-manager';
 
 export class DownloadError extends Error {}
 
+type CSSLibrary = 'tailwind' | 'chakra-ui';
+
 export async function createApp({
   appPath,
   packageManager,
   typescript,
+  cssLibrary = 'tailwind',
 }: {
   appPath: string;
   packageManager: PackageManager;
   typescript?: boolean;
+  cssLibrary?: CSSLibrary;
 }): Promise<void> {
-  const template = typescript ? 'typescript' : 'default';
+  const template =
+    cssLibrary === 'chakra-ui'
+      ? 'chakra'
+      : typescript
+      ? 'typescript'
+      : 'default';
 
   const root = path.resolve(appPath);
 
@@ -48,14 +57,6 @@ export async function createApp({
   const isOnline = !useYarn || (await getOnline());
   const originalDirectory = process.cwd();
 
-  console.log(`      
-  :::::::::                       ::::::::: 
-  :+:    :+:                      :+:    :+: 
-  +:+    +:+                      +:+    +:+  
-  +#+    +:+                      +#+    +:+   
-  +#+    +#+                      +#+    +#+    
-  #+#    #+#                      #+#    #+#     
-  #########       ##########      #########       `);
   console.log(`🚀 Setting up your new Web3 frontend in ${chalk.green(root)}.`);
   console.log();
 
@@ -91,16 +92,37 @@ export async function createApp({
    * These flags will be passed to `install()`.
    */
   const installFlags = { packageManager, isOnline };
+
+  /**
+   * CSS library dependencies.
+   */
+  const cssLibDependencies =
+    cssLibrary === 'tailwind'
+      ? []
+      : [
+          '@chakra-ui/react',
+          '@emotion/react@^11',
+          '@emotion/styled@^11',
+          'framer-motion@^6',
+        ];
+
+  /**
+   * CSS library dev dependencies.
+   */
+  const cssLibDevDependencies =
+    cssLibrary === 'tailwind' ? ['autoprefixer', 'postcss', 'tailwindcss'] : [];
+
   /**
    * Default dependencies.
    */
   const dependencies = [
-    'react@17.0.0',
-    'react-dom@17.0.0',
+    'react@^18',
+    'react-dom@^18',
     'next',
     'wagmi@0.4.5',
     'ethers',
     '@rainbow-me/rainbowkit@0.2.1',
+    ...cssLibDependencies,
   ];
   /**
    * Default devDependencies.
@@ -108,14 +130,12 @@ export async function createApp({
   const devDependencies = [
     'eslint',
     'eslint-config-next',
-    'autoprefixer',
-    'postcss',
-    'tailwindcss',
+    ...cssLibDevDependencies,
   ];
   /**
    * TypeScript projects will have type definitions and other devDependencies.
    */
-  if (typescript) {
+  if (typescript || cssLibrary === 'chakra-ui') {
     devDependencies.push(
       'typescript',
       '@types/react',
