@@ -47,9 +47,5 @@
     "typescript": "^4.6.2",
     "update-check": "1.5.4",
     "validate-npm-package-name": "3.0.0"
-  },
-  "dependencies": {
-    "@rainbow-me/rainbowkit": "^0.4.5",
-    "wagmi": "^0.6.0"
   }
 }
