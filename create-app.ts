@@ -119,9 +119,9 @@ export async function createApp({
     'react@^18',
     'react-dom@^18',
     'next',
-    'wagmi@0.4.5',
+    'wagmi@0.6.1',
     'ethers',
-    '@rainbow-me/rainbowkit@0.2.1',
+    '@rainbow-me/rainbowkit@0.4.5',
     ...cssLibDependencies,
   ];
   /**
