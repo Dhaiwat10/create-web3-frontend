@@ -116,12 +116,12 @@ export async function createApp({
    * Default dependencies.
    */
   const dependencies = [
-    'react@^18',
-    'react-dom@^18',
+    'react@^18.0.6',
+    'react-dom@^18.0.2',
     'next',
-    'wagmi@0.6.1',
-    'ethers',
-    '@rainbow-me/rainbowkit@0.4.5',
+    'wagmi@0.11.7',
+    'ethers@5.7.2',
+    '@rainbow-me/rainbowkit@0.11.0',
     ...cssLibDependencies,
   ];
   /**
