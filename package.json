@@ -26,16 +26,17 @@
     "dev": "ncc build ./index.ts -w -o dist/",
     "prerelease": "rimraf ./dist/",
     "release": "ncc build ./index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
-    "prepublish": "yarn release"
+    "prepublish": "pnpm release",
+    "build": "ncc build ./index.ts -o ./dist/"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
-    "@types/node": "^12.6.8",
+    "@types/node": "^18.15.11",
     "@types/prompts": "2.0.1",
     "@types/rimraf": "3.0.0",
     "@types/tar": "4.0.3",
     "@types/validate-npm-package-name": "3.0.0",
-    "@vercel/ncc": "0.33.1",
+    "@vercel/ncc": "0.36.1",
     "chalk": "2.4.2",
     "commander": "2.20.0",
     "cpy": "7.3.0",
@@ -44,7 +45,7 @@
     "prompts": "2.1.0",
     "rimraf": "3.0.0",
     "tar": "4.4.10",
-    "typescript": "^4.6.2",
+    "typescript": "^4.9.5",
     "update-check": "1.5.4",
     "validate-npm-package-name": "3.0.0"
   }
