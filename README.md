@@ -2,21 +2,11 @@
 
 ![package downloads](https://img.shields.io/npm/dt/create-web3-frontend)
 
-The fastest way to get started with a fully-fledged web3 frontend setup consisting of Next.js, [wagmi](https://wagmi.sh) and [Tailwind CSS](https://tailwindcss.com).
+The fastest way to get started with a fully-fledged web3 frontend setup consisting of Next.js, [wagmi](https://wagmi.sh), [Rainbowkit](https://rainbowkit.com), and [Tailwind CSS](https://tailwindcss.com).
 
 ```bash
-npx create-web3-frontend my-app
-
-# For TypeScript
-npx create-web3-frontend --ts my-app
+npx create-web3-frontend
 ```
-
-## Available options
-
-1. `--ts` or `--typescript`: Use TypeScript instead of JavaScript.
-2. `--chakra` or `--chakra-ui`: Use Chakra UI instead of Tailwind CSS.
-3. `--use-npm`: Use `npm` for installing dependencies.
-4. `--use-pnpm`: Use `pnpm` for installing dependencies.
 
 ## Thanks
 
