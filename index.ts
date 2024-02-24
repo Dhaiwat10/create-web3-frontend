@@ -62,8 +62,8 @@ const main = async () => {
   console.log('To get started:');
   console.log();
   console.log(`- cd into the project directory: cd ${projectPath}`);
-  console.log('- Install dependencies by running `npm install`');
-  console.log('- Run the dev server by running `npm run dev`');
+  console.log('- Install dependencies by running `pnpm install`');
+  console.log('- Run the dev server by running `pnpm dev`');
   console.log();
   console.log();
 };
